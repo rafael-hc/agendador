@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{room.name}} - Agenda</title>
+</head>
+<body>
+    <a href="{% url 'list_rooms' %}">Voltar para Lista</a>
+
+    <h1>Agenda: {{ room.name }}</h1>
+    <a href="{% url 'book_room' room.id %}"><button>Fazer Nova Reserva</button></a>
+    <p>Tipo: {{ room.get_type_display }} | Capacidade: {{ room.capacity }} </p>
+
+    <h3>Próximos Agendamentos</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Horário</th>
+                <th>Solicitantes</th>
+                <th>Motivo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for schedule in scheduling %}
+            <tr>
+                <td>{{ schedule.date|date:"d/m/Y" }}</td>
+                <td>{{ schedule.start }} às {{ schedule.end }}</td>
+                <td>{{ schedule.user.username }}</td>
+                <td>{{ schedule.justification|default:"-" }}</td>
+            </tr>
+            {% empty %}
+            <td colspan="4">Esta sala está livre! Nenhum agendamento futuro.</td>
+            {% endfor %}
+        </tbody>                
+    </table>
+</body>
+</html>

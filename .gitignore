@@ -1,0 +1,35 @@
+# Django-specific files
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+media/ # If you are storing user-uploaded media files locally and don't want them in version control
+static/ # If you are collecting static files locally and don't want them in version control
+
+# Virtual Environment
+.env
+venv/
+.venv/
+env/
+
+# IDE-specific files (e.g., PyCharm, VS Code)
+.idea/
+.vscode/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Test/Coverage files
+.coverage
+.tox/
+.eggs/
+
+# Compiled files
+*.so
+*.mo
+
+# Other
+*/migrations/*.pyc # Ignore compiled migration files

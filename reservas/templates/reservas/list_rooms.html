@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salas do IFF</title>
+</head>
+<body>
+    <h1>Salas e Laboratórios disponíveis</h1>
+    
+    <ul>
+        {% for room in rooms %}
+        <li>
+            <strong>{{ room.name }}</strong>
+            ({{ room.get_type_display }}) - Capacidade: {{ room.capacity }} pessoas
+
+            <br>
+            <a href="{% url 'room_details' room.id %}">Ver Agenda e Ocupação</a>
+            <hr>
+        </li>
+        {% empty %}
+            <p>Nenhuma sala cadastrada no sistema.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>
