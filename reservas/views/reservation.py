@@ -1,30 +1,8 @@
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from datetime import date
-from reservas.models import Room, Reservation
 from reservas.forms import ReservationForm
-
-
-def list_rooms(request):
-    rooms = Room.objects.filter(active=True)
-
-    return render(request, "reservas/list_rooms.html", {"rooms": rooms})
-
-
-def room_details(request, room_id):
-
-    room = get_object_or_404(Room, pk=room_id)
-
-    reservations = room.reservation.filter(date__gte=date.today()).order_by(
-        "date", "start"
-    )
-
-    return render(
-        request,
-        "reservas/room_details.html",
-        {"room": room, "reservations": reservations},
-    )
+from reservas.models import Reservation, Room
+from django.contrib import messages
 
 
 @login_required
