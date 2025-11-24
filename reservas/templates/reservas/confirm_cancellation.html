@@ -1,0 +1,20 @@
+{% extends 'reservas/base.html' %} {% block title %}Reservar Sala{% endblock %}
+{% block content %}
+<div class="card border-danger mb-3" style="max-width: 30rem; margin: 0 auto;">
+  <div class="card-header bg-danger text-white">Perigo: Zona de Exclusão</div>
+  <div class="card-body text-center">
+    <h4 class="card-title">Cancelar Reserva?</h4>
+    <p class="card-text">
+        Você está prestes a liberar a sala <strong>{{ agendamento.sala.nome }}</strong><br>
+        do dia {{ agendamento.data|date:"d/m/Y" }} das {{ agendamento.inicio }} às {{ agendamento.fim }}.
+    </p>
+    <p class="text-muted">Essa ação não pode ser desfeita.</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <a href="{% url 'my_reservations' %}" class="btn btn-secondary">Não, manter reserva</a>
+        <button type="submit" class="btn btn-danger">Sim, Cancelar Agora</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

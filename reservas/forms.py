@@ -1,13 +1,15 @@
 from django import forms
-from reservas.models import Scheduling
+from reservas.models import Reservation
 
-class SchedulingForm(forms.ModelForm):
+
+class ReservationForm(forms.ModelForm):
     class Meta:
-        model = Scheduling
-        fields = ['date', 'start', 'end', 'justification']
+        model = Reservation
+        fields = ["date", "start", "end", "justification"]
 
         widgets = {
-            'date': forms.DateInput(attrs={'type': 'date'}),
-            'start': forms.DateInput(attrs={'type': 'time'}),
-            'end': forms.DateInput(attrs={'type': 'time'}),
+            "date": forms.DateInput(attrs={"type": "date", "class": "form-control"}),
+            "start": forms.DateInput(attrs={"type": "time", "class": "form-control"}),
+            "end": forms.DateInput(attrs={"type": "time", "class": "form-control"}),
+            "justification": forms.Textarea(attrs={"class": "form-control"}),
         }

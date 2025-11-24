@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salas do IFF</title>
-</head>
-<body>
+{% extends 'reservas/base.html' %} {% block title %}Reservar Sala{% endblock %}
+{% block content %}
     <h1>Salas e Laboratórios disponíveis</h1>
     
-    <ul>
+    <ul class="list-group">
         {% for room in rooms %}
-        <li>
+        <li class="list-group-item">
             <strong>{{ room.name }}</strong>
             ({{ room.get_type_display }}) - Capacidade: {{ room.capacity }} pessoas
 
@@ -22,5 +16,4 @@
             <p>Nenhuma sala cadastrada no sistema.</p>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}

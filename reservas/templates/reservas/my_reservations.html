@@ -1,19 +1,15 @@
 {% extends 'reservas/base.html' %} {% block title %}Reservar Sala{% endblock %}
 {% block content %}
-    <a href="{% url 'list_rooms' %}">Voltar para Lista</a>
+<h2>Minhas reservas</h2>
 
-    <h1>Agenda: <span class="text-success">{{ room.name }}</span></h1>
-    <a href="{% url 'book_room' room.id %}"><button class="btn btn-primary">Fazer Nova Reserva</button></a>
-    <p>Tipo: {{ room.get_type_display }} | Capacidade: {{ room.capacity }} </p>
-
-    <h3>Próximos Agendamentos</h3>
-    <table class="table table-striped">
+<table class="table table-striped">
         <thead>
             <tr>
                 <th>Data</th>
                 <th>Horário</th>
-                <th>Solicitantes</th>
+                <th>Sala</th>
                 <th>Motivo</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -21,11 +17,16 @@
             <tr>
                 <td>{{ reservation.date|date:"d/m/Y" }}</td>
                 <td>{{ reservation.start }} às {{ reservation.end }}</td>
-                <td>{{ reservation.user.username }}</td>
+                <td>{{ reservation.room }}</td>
                 <td>{{ reservation.justification|default:"-" }}</td>
+                <td>
+                  <a href="{% url 'cancel_reservation' reservation.id %}" class="btn btn-sm btn-outline-danger">
+                    Cancelar
+                  </a>
+                </td>
             </tr>
             {% empty %}
-            <td colspan="4">Esta sala está livre! Nenhum agendamento futuro.</td>
+            <td colspan="5">Esta sala está livre! Nenhum agendamento futuro.</td>
             {% endfor %}
         </tbody>                
     </table>
