@@ -16,10 +16,12 @@
                 <a href="{% url 'list_rooms' %}" class="navbar-brand">IFF Agendador</a>
 
                 {% if user.is_authenticated %}
-                    <span class="navbar-text text-white">Olá, {{ user.username }}</span>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'my_reservations' %}">Meus Agendamentos</a>
-                    </li>
+                    <div style=" display: flex; gap: 1rem; align-items: center; ">
+                        <span class="navbar-text text-white">Olá, {{ user.username }}</span>
+                        <li class="nav-item list-group-item">
+                            <a class="nav-link" href="{% url 'my_reservations' %}">Meus Agendamentos</a>
+                        </li>
+                    </div>
                 {% endif %}
 
             </div>
