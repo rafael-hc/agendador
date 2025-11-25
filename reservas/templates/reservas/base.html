@@ -14,16 +14,33 @@
         <nav class="navbar navbar-dark bg bg-success mb-4">
             <div class="container">
                 <a href="{% url 'list_rooms' %}" class="navbar-brand">IFF Agendador</a>
+                <ul class="navbar-nav ms-auto" style=" flex-direction: row; gap: 1rem; ">
 
-                {% if user.is_authenticated %}
-                    <div style=" display: flex; gap: 1rem; align-items: center; ">
-                        <span class="navbar-text text-white">Olá, {{ user.username }}</span>
-                        <li class="nav-item list-group-item">
-                            <a class="nav-link" href="{% url 'my_reservations' %}">Meus Agendamentos</a>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <span class="nav-link text-white">Olá, {{ user.username }}</span>
                         </li>
-                    </div>
-                {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold"
+                               href="{% url 'my_reservations' %}">Minhas Reservas</a>
+                        </li>
+                        <li class="nav-item">
+                            <form action="{% url 'logout' %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit"
+                                        class="btn btn-link nav-link text-danger"
+                                        style="text-decoration: none">
+                                    Sair 🚪
+                                </button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold" href="{% url 'login' %}">Entrar 🔐</a>
+                        </li>
+                    {% endif %}
 
+                </ul>
             </div>
         </nav>
         <div class="container">

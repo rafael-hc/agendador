@@ -1,3 +1,5 @@
+# from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 
 from reservas import views
@@ -13,4 +15,6 @@ urlpatterns = [
         name='cancel_reservation',
     ),
     path('sala/criar/', views.create_room, name='create_room'),
+    path('accounts/login/', LoginView.as_view(), name='login'),
+    path('accounts/logout/', LogoutView.as_view(), name='logout'),
 ]

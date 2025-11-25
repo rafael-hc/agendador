@@ -127,3 +127,14 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# --- Configurações de Login ---
+
+# Se o usuário tentar acessar uma página trancada, manda pra cá:
+LOGIN_URL = 'login'
+
+# Depois de logar com sucesso, manda pra lista de salas (em vez do admin):
+LOGIN_REDIRECT_URL = 'list_rooms'
+
+# Depois de deslogar, manda de volta para a tela de login:
+LOGOUT_REDIRECT_URL = 'list_rooms'
