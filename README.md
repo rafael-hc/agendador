@@ -4,14 +4,14 @@ Sistema de gerenciamento de reservas de salas e laboratórios desenvolvido como 
 
 O objetivo é substituir o controle manual/planilhas por uma solução centralizada que valida conflitos de horário automaticamente e permite autogestão pelos servidores.
 
-## 🚀 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **Backend:** Python 3.10+ / Django 5.x
 - **Frontend:** HTML5, CSS3, Bootstrap 5 (Responsivo)
 - **Banco de Dados:** SQLite (Ambiente de Desenvolvimento)
 - **Controle de Versão:** Git / GitHub
 
-## 📋 Funcionalidades Principais
+## Funcionalidades Principais
 
 - **Busca Inteligente:** Filtragem de salas por nome ou capacidade mínima.
 - **Validação de Conflitos:** Lógica robusta que impede matematicamente o choque de horários (incluindo sobreposições parciais).
@@ -19,7 +19,7 @@ O objetivo é substituir o controle manual/planilhas por uma solução centraliz
 - **Segurança:** Sistema de permissões onde apenas o dono da reserva pode cancelá-la.
 - **Interface Amigável:** Layout limpo e responsivo utilizando Bootstrap.
 
-## 🔧 Instalação e Configuração
+## Instalação e Configuração
 
 Siga estes passos para rodar o projeto em uma nova máquina (Windows, Linux ou WSL).
 
@@ -31,7 +31,7 @@ Siga estes passos para rodar o projeto em uma nova máquina (Windows, Linux ou W
 
 1. **Clone o repositório**
    ```bash
-   git clone [https://github.com/SEU_USUARIO_AQUI/agendador.git](https://github.com/SEU_USUARIO_AQUI/agendador.git)
+   git clone [https://github.com/rafael-hc/agendador.git](https://github.com/rafael-hc/agendador.git)
    cd agendador
    ```
 
@@ -77,7 +77,7 @@ Siga estes passos para rodar o projeto em uma nova máquina (Windows, Linux ou W
 
     Acesse: `http://127.0.0.1:8000/`
 
-## ✅ Testes Automatizados
+## Testes Automatizados
 
 O projeto possui cobertura de testes unitários para garantir a integridade das regras de negócio (especialmente a validação de conflitos).
 
