@@ -33,7 +33,7 @@ Siga estes passos para rodar o projeto em uma nova máquina (Windows, Linux ou W
    ```bash
    git clone [https://github.com/SEU_USUARIO_AQUI/agendador.git](https://github.com/SEU_USUARIO_AQUI/agendador.git)
    cd agendador
-````
+   ```
 
 2.  **Crie e ative o Ambiente Virtual**
 
