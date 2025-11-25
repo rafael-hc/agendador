@@ -26,7 +26,7 @@ Siga estes passos para rodar o projeto em uma nova máquina (Windows, Linux ou W
 
 1. **Clone o repositório**
    ```bash
-   git clone [https://github.com/rafael-hc/agendador.git](https://github.com/rafael-hc/agendador.git)
+   git clone https://github.com/rafael-hc/agendador.git
    cd agendador
    ```
 
