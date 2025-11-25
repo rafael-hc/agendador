@@ -1,55 +1,53 @@
 from datetime import date
 
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required, user_passes_test
-from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DetailView, ListView
 
 from reservas.forms import RoomForm
 from reservas.models import Room
 
 
-def is_admin(user):
-    return user.is_staff
+class RoomCreateView(LoginRequiredMixin, CreateView):
+    model = Room
+    form_class = RoomForm
+    template_name = 'reservas/create_room.html'
+    success_url = reverse_lazy('list_rooms')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            from django.core.exceptions import PermissionDenied
+
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
 
 
-@login_required
-@user_passes_test(is_admin)
-def create_room(request):
-    if request.method == 'POST':
-        form = RoomForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Sala cadastrada com sucesso.')
-            return redirect('list_rooms')
-    else:
-        form = RoomForm()
+class RoomListView(ListView):
+    model = Room
+    template_name = 'reservas/list_rooms.html'
+    context_object_name = 'rooms'
 
-    return render(request, 'reservas/create_room.html', {'form': form})
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(active=True)
+        query = self.request.GET.get('busca')
 
+        if query:
+            if query.isdigit():
+                queryset = queryset.filter(capacity__gte=int(query))
+            else:
+                queryset = queryset.filter(name__icontains=query)
 
-def list_rooms(request):
-    rooms = Room.objects.filter(active=True)
-
-    query = request.GET.get('busca')
-
-    if query:
-        if query.isdigit():
-            rooms = rooms.filter(capacity__gte=int(query))
-        else:
-            rooms = rooms.filter(name__icontains=query)
-
-    return render(request, 'reservas/list_rooms.html', {'rooms': rooms})
+        return queryset
 
 
-def room_details(request, room_id):
-    room = get_object_or_404(Room, pk=room_id)
+class RoomDetailsView(DetailView):
+    model = Room
+    template_name = 'reservas/room_details.html'
+    context_object_name = 'room'
 
-    reservations = room.reservation.filter(date__gte=date.today()).order_by(
-        'date', 'start'
-    )
-
-    return render(
-        request,
-        'reservas/room_details.html',
-        {'room': room, 'reservations': reservations},
-    )
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['reservations'] = self.object.reservations.filter(
+            date__gte=date.today()
+        ).order_by('date', 'start')
+        return context

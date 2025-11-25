@@ -42,7 +42,7 @@
                 <strong>{{ room.name }}</strong>
                 ({{ room.get_type_display }}) - Capacidade: {{ room.capacity }} pessoas
                 <br>
-                <a href="{% url 'room_details' room.id %}">Ver Agenda e Ocupação</a>
+                <a href="{% url 'room_details' room.pk %}">Ver Agenda e Ocupação</a>
                 <hr>
             </li>
         {% empty %}

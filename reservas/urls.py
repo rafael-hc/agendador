@@ -5,8 +5,12 @@ from django.urls import path
 from reservas import views
 
 urlpatterns = [
-    path('', views.list_rooms, name='list_rooms'),
-    path('sala/<int:room_id>/', views.room_details, name='room_details'),
+    path('', views.RoomListView.as_view(), name='list_rooms'),
+    path(
+        'sala/<int:pk>/',
+        views.RoomDetailsView.as_view(),
+        name='room_details',
+    ),
     path('sala/<int:room_id>/reservar/', views.book_room, name='book_room'),
     path('minhas_reservas/', views.my_reservations, name='my_reservations'),
     path(
@@ -14,7 +18,7 @@ urlpatterns = [
         views.cancel_reservation,
         name='cancel_reservation',
     ),
-    path('sala/criar/', views.create_room, name='create_room'),
+    path('sala/criar/', views.RoomCreateView.as_view(), name='create_room'),
     path('accounts/login/', LoginView.as_view(), name='login'),
     path('accounts/logout/', LogoutView.as_view(), name='logout'),
 ]
