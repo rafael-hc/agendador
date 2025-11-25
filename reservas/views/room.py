@@ -1,7 +1,26 @@
 from datetime import date
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
+from reservas.forms import RoomForm
 from reservas.models import Room
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib import messages
 
+def is_admin(user):
+    return user.is_staff
+
+@login_required
+@user_passes_test(is_admin)
+def create_room(request):
+    if request.method == "POST":
+        form = RoomForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Sala cadastrada com sucesso.")
+            return redirect("list_rooms")
+    else:
+        form = RoomForm()
+
+    return render(request, "reservas/create_room.html", {"form": form})
 
 def list_rooms(request):
     rooms = Room.objects.filter(active=True)

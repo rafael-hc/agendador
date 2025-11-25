@@ -1,6 +1,14 @@
 {% extends 'reservas/base.html' %} {% block title %}Reservar Sala{% endblock %}
 {% block content %}
-    <h1>Salas e Laboratórios disponíveis</h1>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Salas Disponíveis</h2>
+    
+    {% if user.is_staff %}
+        <a href="{% url 'create_rooml' %}" class="btn btn-primary">
+            + Nova Sala
+        </a>
+    {% endif %}
+</div>
 
     <div class="card mb-4">
         <div class="card-body">
