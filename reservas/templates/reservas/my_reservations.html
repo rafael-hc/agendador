@@ -1,8 +1,10 @@
-{% extends 'reservas/base.html' %} {% block title %}Reservar Sala{% endblock %}
-{% block content %}
-<h2>Minhas reservas</h2>
+{% extends 'reservas/base.html' %}
 
-<table class="table table-striped">
+{% block title %}Reservar Sala{% endblock %}
+
+{% block content %}
+    <h2>Minhas reservas</h2>
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Data</th>
@@ -13,21 +15,22 @@
             </tr>
         </thead>
         <tbody>
+
             {% for reservation in reservations %}
-            <tr>
-                <td>{{ reservation.date|date:"d/m/Y" }}</td>
-                <td>{{ reservation.start }} às {{ reservation.end }}</td>
-                <td>{{ reservation.room }}</td>
-                <td>{{ reservation.justification|default:"-" }}</td>
-                <td>
-                  <a href="{% url 'cancel_reservation' reservation.id %}" class="btn btn-sm btn-outline-danger">
-                    Cancelar
-                  </a>
-                </td>
-            </tr>
+                <tr>
+                    <td>{{ reservation.date|date:"d/m/Y" }}</td>
+                    <td>{{ reservation.start }} às {{ reservation.end }}</td>
+                    <td>{{ reservation.room }}</td>
+                    <td>{{ reservation.justification|default:"-" }}</td>
+                    <td>
+                        <a href="{% url 'cancel_reservation' reservation.id %}"
+                           class="btn btn-sm btn-outline-danger">Cancelar</a>
+                    </td>
+                </tr>
             {% empty %}
-            <td colspan="5">Esta sala está livre! Nenhum agendamento futuro.</td>
+                <td colspan="5">Esta sala está livre! Nenhum agendamento futuro.</td>
             {% endfor %}
-        </tbody>                
+
+        </tbody>
     </table>
 {% endblock %}

@@ -1,49 +1,53 @@
-{% extends 'reservas/base.html' %} {% block title %}Reservar Sala{% endblock %}
+{% extends 'reservas/base.html' %}
+
+{% block title %}Reservar Sala{% endblock %}
+
 {% block content %}
     <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2>Salas Disponíveis</h2>
-    
-    {% if user.is_staff %}
-        <a href="{% url 'create_rooml' %}" class="btn btn-primary">
-            + Nova Sala
-        </a>
-    {% endif %}
-</div>
+        <h2>Salas Disponíveis</h2>
 
+        {% if user.is_staff %}
+            <a href="{% url 'create_room' %}" class="btn btn-primary">+ Nova Sala</a>
+        {% endif %}
+
+    </div>
     <div class="card mb-4">
         <div class="card-body">
             <form method="get" class="row g-3">
                 <div class="col-md-10">
-                    <input type="text" name="busca" class="form-control" 
-                        placeholder="Buscar por nome ou capacidade mínima (ex: 30)..."
-                        value="{{ request.GET.busca }}">
+                    <input type="text"
+                           name="busca"
+                           class="form-control"
+                           placeholder="Buscar por nome ou capacidade mínima (ex: 30)..."
+                           value="{{ request.GET.busca }}">
                 </div>
                 <div class="col-md-2">
                     <button type="submit" class="btn btn-primary w-100">Filtrar</button>
                 </div>
             </form>
-            
+
             {% if request.GET.busca %}
                 <div class="mt-2">
                     <small class="text-muted">Mostrando resultados para: <strong>{{ request.GET.busca }}</strong></small>
                     <a href="{% url 'list_rooms' %}" class="text-decoration-none ms-2">Limpar filtro</a>
                 </div>
             {% endif %}
+
         </div>
     </div>
-    
     <ul class="list-group">
-        {% for room in rooms %}
-        <li class="list-group-item">
-            <strong>{{ room.name }}</strong>
-            ({{ room.get_type_display }}) - Capacidade: {{ room.capacity }} pessoas
 
-            <br>
-            <a href="{% url 'room_details' room.id %}">Ver Agenda e Ocupação</a>
-            <hr>
-        </li>
+        {% for room in rooms %}
+            <li class="list-group-item">
+                <strong>{{ room.name }}</strong>
+                ({{ room.get_type_display }}) - Capacidade: {{ room.capacity }} pessoas
+                <br>
+                <a href="{% url 'room_details' room.id %}">Ver Agenda e Ocupação</a>
+                <hr>
+            </li>
         {% empty %}
             <p>Nenhuma sala cadastrada no sistema.</p>
         {% endfor %}
+
     </ul>
 {% endblock %}

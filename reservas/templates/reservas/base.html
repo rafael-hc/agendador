@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Sistema de Reservas IFF Cambuci{% endblock %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-    <nav class="navbar navbar-dark bg bg-success mb-4">
-        <div class="container">
-            <a href="{% url 'list_rooms' %}" class="navbar-brand">IFF Agendador</a>
-            {% if user.is_authenticated %}
-                <span class="navbar-text text-white">Olá, {{ user.username }}</span>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'my_reservations' %}">Meus Agendamentos</a>
-                </li>
-            {% endif %}
-        </div>
-    </nav>
-    
-    <div class="container">
-        <div class="card shadow-sm">
-            <div class="card-body">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
 
-                {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{message.tags}}">{{ message }}</div>
-                {% endfor %}
+            {% block title %}Sistema de Reservas IFF Cambuci{% endblock %}
+        </title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+              rel="stylesheet">
+    </head>
+    <body class="bg-light">
+        <nav class="navbar navbar-dark bg bg-success mb-4">
+            <div class="container">
+                <a href="{% url 'list_rooms' %}" class="navbar-brand">IFF Agendador</a>
+
+                {% if user.is_authenticated %}
+                    <span class="navbar-text text-white">Olá, {{ user.username }}</span>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'my_reservations' %}">Meus Agendamentos</a>
+                    </li>
                 {% endif %}
 
-                {% block content %}
-                {% endblock %}
             </div>
+        </nav>
+        <div class="container">
+            <div class="card shadow-sm">
+                <div class="card-body">
+
+                    {% if messages %}
+
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+
+                    {% endif %}
+
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+            <footer class="text-center mt-4 text-muted">
+                <small>Desenvolvido para o time de Dev do IFF</small>
+            </footer>
         </div>
-        <footer class="text-center mt-4 text-muted">
-            <small>Desenvolvido para o time de Dev do IFF</small>
-        </footer>
-    </div>
-</body>
+    </body>
 </html>

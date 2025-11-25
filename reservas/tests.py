@@ -1,19 +1,21 @@
-from django.test import TestCase
-from django.contrib.auth.models import User
-from .models import Room, Reservation
 from datetime import date, time
+
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.test import TestCase
+
+from .models import Reservation, Room
 
 
 # Create your tests here.
 class ReservationModelTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create(username="tester")
+        self.user = User.objects.create(username='tester')
 
         self.room = Room.objects.create(
-            name="Lab test",
+            name='Lab test',
             capacity=30,
-            type="LAB",
+            type='LAB',
         )
 
         self.reservation = Reservation.objects.create(
@@ -57,4 +59,6 @@ class ReservationModelTest(TestCase):
             reservation_ok.clean()
 
         except ValidationError:
-            self.fail("O teste falhou: Deveria permitir agendamento sem conflito.")
+            self.fail(
+                'O teste falhou: Deveria permitir agendamento sem conflito.'
+            )

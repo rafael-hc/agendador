@@ -1,11 +1,16 @@
-{% extends 'reservas/base.html' %} {% block title %}Reservar Sala{% endblock %}
+{% extends 'reservas/base.html' %}
+
+{% block title %}Reservar Sala{% endblock %}
+
 {% block content %}
     <a href="{% url 'list_rooms' %}">Voltar para Lista</a>
-
-    <h1>Agenda: <span class="text-success">{{ room.name }}</span></h1>
-    <a href="{% url 'book_room' room.id %}"><button class="btn btn-primary">Fazer Nova Reserva</button></a>
-    <p>Tipo: {{ room.get_type_display }} | Capacidade: {{ room.capacity }} </p>
-
+    <h1>
+        Agenda: <span class="text-success">{{ room.name }}</span>
+    </h1>
+    <a href="{% url 'book_room' room.id %}">
+        <button class="btn btn-primary">Fazer Nova Reserva</button>
+    </a>
+    <p>Tipo: {{ room.get_type_display }} | Capacidade: {{ room.capacity }}</p>
     <h3>Próximos Agendamentos</h3>
     <table class="table table-striped">
         <thead>
@@ -17,16 +22,18 @@
             </tr>
         </thead>
         <tbody>
+
             {% for reservation in reservations %}
-            <tr>
-                <td>{{ reservation.date|date:"d/m/Y" }}</td>
-                <td>{{ reservation.start }} às {{ reservation.end }}</td>
-                <td>{{ reservation.user.username }}</td>
-                <td>{{ reservation.justification|default:"-" }}</td>
-            </tr>
+                <tr>
+                    <td>{{ reservation.date|date:"d/m/Y" }}</td>
+                    <td>{{ reservation.start }} às {{ reservation.end }}</td>
+                    <td>{{ reservation.user.username }}</td>
+                    <td>{{ reservation.justification|default:"-" }}</td>
+                </tr>
             {% empty %}
-            <td colspan="4">Esta sala está livre! Nenhum agendamento futuro.</td>
+                <td colspan="4">Esta sala está livre! Nenhum agendamento futuro.</td>
             {% endfor %}
-        </tbody>                
+
+        </tbody>
     </table>
 {% endblock %}

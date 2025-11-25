@@ -1,0 +1,24 @@
+[tool.ruff]
+# Comprimento da linha (Black usa 88, mas 100 ou 120 é comum em Django)
+line-length = 80
+exclude = [".venv", "migrations"]
+
+[tool.ruff.lint]
+# Habilita Pyflakes (F), Pycodestyle (E, W), Isort (I)
+select = ["F", "E", "W", "I"]
+# Ignora erros comuns que o Django provoca
+ignore = ["E501"] # Ignora linhas muito longas (deixa o formatter cuidar disso)
+
+[tool.ruff.format]
+# Usa aspas duplas (padrão Python)
+quote-style = "single"
+# Indentação com 4 espaços
+indent-style = "space"
+
+[tool.djlint]
+profile = "django"
+indent = 3
+blank_line_after_tag = "load,extends,include,endif,endfor"
+ignore = "T002,T003,H030,H031,H021"
+max_line_length = 80
+blank_line_before_tag = "block,include,for,if"

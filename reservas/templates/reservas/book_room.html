@@ -1,12 +1,14 @@
-{% extends 'reservas/base.html' %} {% block title %}Reservar Sala{% endblock %}
+{% extends 'reservas/base.html' %}
+
+{% block title %}Reservar Sala{% endblock %}
 
 {% block content %}
-    <h2 class="mb-3">Nova Reserva: <span class="text-success">{{ room.name }}</span></h2>
+    <h2 class="mb-3">
+        Nova Reserva: <span class="text-success">{{ room.name }}</span>
+    </h2>
 
     {% if form.non_field_errors %}
-        <div class="alert alert-danger">
-            {{ form.non_field_errors }}
-        </div>
+        <div class="alert alert-danger">{{ form.non_field_errors }}</div>
     {% endif %}
 
     <form method="post">
@@ -16,13 +18,16 @@
             <div class="mb-3">
                 <label class="form-label">{{ field.label }}</label>
                 {{ field }}
+
                 {% if field.errors %}
                     <div class="text-danger small">{{ field.errors }}</div>
                 {% endif %}
+
             </div>
         {% endfor %}
 
         <button type="submit" class="btn btn-success">Confirmar Reserva</button>
-        <a href="{% url 'room_details' room.id %}" class="btn btn-outline-secondary">Cancelar</a>
+        <a href="{% url 'room_details' room.id %}"
+           class="btn btn-outline-secondary">Cancelar</a>
     </form>
 {% endblock %}
