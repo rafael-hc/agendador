@@ -1,23 +1,18 @@
-# Agendador de Salas - IFF
+# Agendador de Salas
 
-Sistema de gerenciamento de reservas de salas e laboratórios desenvolvido como Prova de Conceito (PoC) para otimizar o uso de espaços no campus do IFF.
+Sistema de gerenciamento de reservas desenvolvido como exercício.
 
-O objetivo é substituir o controle manual/planilhas por uma solução centralizada que valida conflitos de horário automaticamente e permite autogestão pelos servidores.
 
-## Tecnologias Utilizadas
+## Funcionalidades Implementadas
 
-- **Backend:** Python 3.10+ / Django 5.x
-- **Frontend:** HTML5, CSS3, Bootstrap 5 (Responsivo)
-- **Banco de Dados:** SQLite (Ambiente de Desenvolvimento)
-- **Controle de Versão:** Git / GitHub
+- **Validação Temporal Robusta:** Algoritmo que impede conflitos de horário (incluindo sobreposições parciais).
+- **Busca e Filtros:** Pesquisa dinâmica por nome da sala ou capacidade mínima.
+- **Autenticação Customizada:** Sistema de login/logout integrado (sem depender apenas do Django Admin).
+- **Controle de Acesso:**
+  - Usuários comuns: Visualizam e gerenciam apenas suas próprias reservas.
+  - Staff/Admin: Cadastram novas salas e gerenciam todo o sistema.
+- **Interface Responsiva:** Layout adaptado para mobile e desktop.
 
-## Funcionalidades Principais
-
-- **Busca Inteligente:** Filtragem de salas por nome ou capacidade mínima.
-- **Validação de Conflitos:** Lógica robusta que impede matematicamente o choque de horários (incluindo sobreposições parciais).
-- **Gestão de Reservas:** Painel "Minhas Reservas" onde o usuário visualiza e cancela seus agendamentos.
-- **Segurança:** Sistema de permissões onde apenas o dono da reserva pode cancelá-la.
-- **Interface Amigável:** Layout limpo e responsivo utilizando Bootstrap.
 
 ## Instalação e Configuração
 
