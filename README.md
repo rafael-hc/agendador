@@ -89,4 +89,4 @@ python manage.py test reservas
 
 -----
 
-**Desenvolvido por Rafael Carneiro** | Técnico em Tecnologia da Informação - IFF
+**Desenvolvido por Rafael Carneiro**
