@@ -49,5 +49,5 @@ class RoomDetailsView(DetailView):
         context = super().get_context_data(**kwargs)
         context['reservations'] = self.object.reservations.filter(
             date__gte=date.today()
-        ).order_by('date', 'start')
+        ).order_by('date', 'start_time')
         return context
