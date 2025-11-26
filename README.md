@@ -81,6 +81,28 @@ Para executar os testes:
 ```bash
 python manage.py test reservas
 ```
+## API REST e Autenticação
+
+O sistema possui uma API completa para integração com aplicativos móveis e terceiros.
+
+### Endpoints Disponíveis
+
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| `GET` | `/reservas/api/rooms/` | Lista todas as salas ativas. |
+| `GET` | `/reservas/api/reservations/` | Lista todas as reservas (se admin) ou suas próprias. |
+| `POST` | `/reservas/api/reservations/` | Cria uma nova reserva (Validação de conflito inclusa). |
+
+### Como se Autenticar (Token Auth)
+Para acessar endpoints protegidos via mobile/script, obtenha um token:
+
+**POST** `/api/token-auth/`
+```json
+{
+    "username": "seu_usuario",
+    "password": "sua_senha"
+}
+```
 
 -----
 
