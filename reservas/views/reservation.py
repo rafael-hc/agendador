@@ -1,53 +1,54 @@
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, ListView
 
 from reservas.forms import ReservationForm
 from reservas.models import Reservation, Room
 
 
-@login_required
-def book_room(request, room_id):
-    room = get_object_or_404(Room, pk=room_id)
+class ReservationCreateView(LoginRequiredMixin, CreateView):
+    model = Reservation
+    form_class = ReservationForm
+    template_name = 'reservas/reserve_room.html'
 
-    if request.method == 'POST':
-        reservation_temp = Reservation(room=room, user=request.user)
-        form = ReservationForm(request.POST, instance=reservation_temp)
-        if form.is_valid():
-            form.save()
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
 
-            return redirect('room_details', room_id=room.id)
-    else:
-        form = ReservationForm()
+        if 'room_id' in self.kwargs:
+            self.room = get_object_or_404(Room, pk=self.kwargs['room_id'])
 
-    return render(
-        request, 'reservas/book_room.html', {'form': form, 'room': room}
-    )
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.instance.room = self.room
+        form.instance.user = self.request.user
+        return form
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['room'] = self.room
+        return context
 
-@login_required
-def my_reservations(request):
-    reservations = Reservation.objects.filter(user=request.user).order_by(
-        'date'
-    )
-    return render(
-        request, 'reservas/my_reservations.html', {'reservations': reservations}
-    )
+    def get_success_url(self):
+        return reverse_lazy('room_details', kwargs={'pk': self.room.pk})
 
 
-@login_required
-def cancel_reservation(request, reservation_id):
-    reservation = get_object_or_404(
-        Reservation, pk=reservation_id, user=request.user
-    )
+class MyReservationsListView(LoginRequiredMixin, ListView):
+    model = Reservation
+    template_name = 'reservas/my_reservations.html'
+    context_object_name = 'reservations'
 
-    if request.method == 'POST':
-        reservation.delete()
-        messages.success(request, 'Reserva cancelada com sucesso')
-        return redirect('my_reservations')
+    def get_queryset(self):
+        return Reservation.objects.filter(user=self.request.user).order_by(
+            'date', 'start'
+        )
 
-    return render(
-        request,
-        'reservas/confirm_cancellation.html',
-        {'reservation': reservation},
-    )
+
+class ReservationDeleteView(LoginRequiredMixin, DeleteView):
+    model = Reservation
+    template_name = 'reservas/confirm_cancellation.html'
+    context_object_name = 'reservation'
+    success_url = reverse_lazy('my_reservations')
+
+    def get_queryset(self):
+        return Reservation.objects.filter(user=self.request.user)

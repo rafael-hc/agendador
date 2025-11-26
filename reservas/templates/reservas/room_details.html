@@ -7,7 +7,7 @@
     <h1>
         Agenda: <span class="text-success">{{ room.name }}</span>
     </h1>
-    <a href="{% url 'book_room' room.id %}">
+    <a href="{% url 'reserve_room' room.id %}">
         <button class="btn btn-primary">Fazer Nova Reserva</button>
     </a>
     <p>Tipo: {{ room.get_type_display }} | Capacidade: {{ room.capacity }}</p>

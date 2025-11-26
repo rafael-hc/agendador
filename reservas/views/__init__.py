@@ -1,2 +1,6 @@
-from .reservation import book_room, cancel_reservation, my_reservations
+from .reservation import (
+    MyReservationsListView,
+    ReservationCreateView,
+    ReservationDeleteView,
+)
 from .room import RoomCreateView, RoomDetailsView, RoomListView

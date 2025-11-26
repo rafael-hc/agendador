@@ -10,9 +10,9 @@
     <div class="card-body text-center">
       <h4 class="card-title">Cancelar Reserva?</h4>
       <p class="card-text">
-        Você está prestes a liberar a sala <strong>{{ agendamento.sala.nome }}</strong>
+        Você está prestes a liberar a sala <strong>{{ reservation.room.name }}</strong>
         <br>
-        do dia {{ agendamento.data|date:"d/m/Y" }} das {{ agendamento.inicio }} às {{ agendamento.fim }}.
+        do dia {{ reservation.date|date:"d/m/Y" }} das {{ reservation.start }} às {{ reservation.end }}.
       </p>
       <p class="text-muted">Essa ação não pode ser desfeita.</p>
       <form method="post">

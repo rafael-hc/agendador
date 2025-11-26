@@ -11,11 +11,19 @@ urlpatterns = [
         views.RoomDetailsView.as_view(),
         name='room_details',
     ),
-    path('sala/<int:room_id>/reservar/', views.book_room, name='book_room'),
-    path('minhas_reservas/', views.my_reservations, name='my_reservations'),
     path(
-        'cancelar/<int:reservation_id>/',
-        views.cancel_reservation,
+        'sala/<int:room_id>/reservar/',
+        views.ReservationCreateView.as_view(),
+        name='reserve_room',
+    ),
+    path(
+        'minhas_reservas/',
+        views.MyReservationsListView.as_view(),
+        name='my_reservations',
+    ),
+    path(
+        'cancelar/<int:pk>/',
+        views.ReservationDeleteView.as_view(),
         name='cancel_reservation',
     ),
     path('sala/criar/', views.RoomCreateView.as_view(), name='create_room'),
