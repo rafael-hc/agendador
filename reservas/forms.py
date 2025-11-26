@@ -6,16 +6,16 @@ from reservas.models import Reservation, Room
 class ReservationForm(forms.ModelForm):
     class Meta:
         model = Reservation
-        fields = ['date', 'start', 'end', 'justification']
+        fields = ['date', 'start_time', 'end_time', 'justification']
 
         widgets = {
             'date': forms.DateInput(
                 attrs={'type': 'date', 'class': 'form-control'}
             ),
-            'start': forms.DateInput(
+            'start_time': forms.DateInput(
                 attrs={'type': 'time', 'class': 'form-control'}
             ),
-            'end': forms.DateInput(
+            'end_time': forms.DateInput(
                 attrs={'type': 'time', 'class': 'form-control'}
             ),
             'justification': forms.Textarea(attrs={'class': 'form-control'}),

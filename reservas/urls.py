@@ -29,4 +29,11 @@ urlpatterns = [
     path('sala/criar/', views.RoomCreateView.as_view(), name='create_room'),
     path('accounts/login/', LoginView.as_view(), name='login'),
     path('accounts/logout/', LogoutView.as_view(), name='logout'),
+    # --- API Endpoints ---
+    path('api/rooms/', views.RoomListAPI.as_view(), name='api_room_list'),
+    path(
+        'api/reservations/',
+        views.ReservationListCreateAPI.as_view(),
+        name='api_reservation_list',
+    ),
 ]

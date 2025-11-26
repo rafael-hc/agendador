@@ -12,7 +12,7 @@
       <p class="card-text">
         Você está prestes a liberar a sala <strong>{{ reservation.room.name }}</strong>
         <br>
-        do dia {{ reservation.date|date:"d/m/Y" }} das {{ reservation.start }} às {{ reservation.end }}.
+        do dia {{ reservation.date|date:"d/m/Y" }} das {{ reservation.start_time }} às {{ reservation.end_time }}.
       </p>
       <p class="text-muted">Essa ação não pode ser desfeita.</p>
       <form method="post">

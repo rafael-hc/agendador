@@ -22,8 +22,8 @@ class ReservationModelTest(TestCase):
             room=self.room,
             user=self.user,
             date=date(2025, 12, 1),
-            start=time(14, 0),
-            end=time(16, 0),
+            start_time=time(14, 0),
+            end_time=time(16, 0),
         )
 
     def test_bloqueia_conflito_exato(self):
@@ -32,8 +32,8 @@ class ReservationModelTest(TestCase):
                 room=self.room,
                 user=self.user,
                 date=date(2025, 12, 1),
-                start=time(14, 0),
-                end=time(16, 0),
+                start_time=time(14, 0),
+                end_time=time(16, 0),
             )
 
     def test_bloqueia_sobreposicao_parcial(self):
@@ -42,8 +42,8 @@ class ReservationModelTest(TestCase):
                 room=self.room,
                 user=self.user,
                 date=date(2025, 12, 1),
-                start=time(15, 0),
-                end=time(17, 0),
+                start_time=time(15, 0),
+                end_time=time(17, 0),
             )
 
     def test_permite_horario_livre(self):
@@ -51,8 +51,8 @@ class ReservationModelTest(TestCase):
             room=self.room,
             user=self.user,
             date=date(2025, 12, 1),
-            start=time(16, 0),
-            end=time(18, 0),
+            start_time=time(16, 0),
+            end_time=time(18, 0),
         )
 
         try:

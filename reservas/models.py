@@ -47,15 +47,15 @@ class Reservation(models.Model):
 
     # Dados do agendamento
     date = models.DateField(verbose_name='Data da Reserva')
-    start = models.TimeField(verbose_name='Horário de Início')
-    end = models.TimeField(verbose_name='Horário de Fim')
+    start_time = models.TimeField(verbose_name='Horário de Início')
+    end_time = models.TimeField(verbose_name='Horário de Fim')
 
     justification = models.TextField(
         blank=True, null=True, verbose_name='Motivo/Justificativa'
     )
 
     def clean(self):
-        if self.end <= self.start:
+        if self.end_time <= self.start_time:
             raise ValidationError(
                 'O horário de término deve ser posterior ao início.'
             )
@@ -63,8 +63,8 @@ class Reservation(models.Model):
         conflicting_reservations = Reservation.objects.filter(
             room=self.room,
             date=self.date,
-            start__lt=self.end,
-            end__gt=self.start,
+            start_time__lt=self.end_time,
+            end_time__gt=self.start_time,
         )
 
         if self.id:
@@ -80,9 +80,9 @@ class Reservation(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'{self.room.name} - {self.date} ({self.start} - {self.end})'
+        return f'{self.room.name} - {self.date} ({self.start_time} - {self.end_time})'
 
     class Meta:
         verbose_name = 'Agendamento'
         verbose_name_plural = 'Agendamentos'
-        ordering = ['date', 'start']
+        ordering = ['date', 'start_time']

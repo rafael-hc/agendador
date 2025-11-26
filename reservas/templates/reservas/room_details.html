@@ -26,7 +26,7 @@
             {% for reservation in reservations %}
                 <tr>
                     <td>{{ reservation.date|date:"d/m/Y" }}</td>
-                    <td>{{ reservation.start }} às {{ reservation.end }}</td>
+                    <td>{{ reservation.start_time }} às {{ reservation.end_time }}</td>
                     <td>{{ reservation.user.username }}</td>
                     <td>{{ reservation.justification|default:"-" }}</td>
                 </tr>

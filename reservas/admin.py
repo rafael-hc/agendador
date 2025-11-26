@@ -12,5 +12,5 @@ class SalaAdmin(admin.ModelAdmin):
 
 @admin.register(Reservation)
 class ReservationAdmin(admin.ModelAdmin):
-    list_display = ('room', 'user', 'date', 'start', 'end')
+    list_display = ('room', 'user', 'date', 'start_time', 'end_time')
     list_filter = ('date', 'room')
