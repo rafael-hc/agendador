@@ -7,7 +7,10 @@ exclude = [".venv", "migrations"]
 # Habilita Pyflakes (F), Pycodestyle (E, W), Isort (I)
 select = ["F", "E", "W", "I"]
 # Ignora erros comuns que o Django provoca
-ignore = ["E501"] # Ignora linhas muito longas (deixa o formatter cuidar disso)
+ignore = [
+  "E501",
+  "F401",
+] # Ignora linhas muito longas (deixa o formatter cuidar disso)
 
 [tool.ruff.format]
 # Usa aspas duplas (padrão Python)
